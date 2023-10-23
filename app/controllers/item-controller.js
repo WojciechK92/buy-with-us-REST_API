@@ -8,6 +8,18 @@ class ItemController {
       // error message
     };
   };
+  
+  showItem(req, res) {
+    const { id } = req.params;    
+
+    try {
+      // database connection
+      res.status(200).json('One item');
+    } catch(e) {
+      console.log(e);
+      // error message
+    };
+  };
 };
 
 module.exports = new ItemController();
