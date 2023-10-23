@@ -3,6 +3,9 @@ const router = require('./routes/api');
 
 const app = express();
 
+// database
+require('./db/mongoose');
+
 // body parser
 app.use(express.json());
 
