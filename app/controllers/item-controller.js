@@ -20,6 +20,19 @@ class ItemController {
       // error message
     };
   };
+
+  addItem(req, res) {
+    const body = req.body;
+
+    try {
+      // database connection
+
+      res.status(201).json('Success!');
+    } catch(e) {
+      console.log(e);
+      // error message
+    };
+  };
 };
 
 module.exports = new ItemController();
