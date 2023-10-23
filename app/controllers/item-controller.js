@@ -33,6 +33,19 @@ class ItemController {
       // error message
     };
   };
+
+  editItem(req, res) {
+    const { id } = req.params;    
+    const body = req.body;
+
+    try {
+      // database connection
+      res.status(200).json('Edited!')
+    } catch(e) {
+      console.log(e);
+      // error message
+    };
+  };
 };
 
 module.exports = new ItemController();
