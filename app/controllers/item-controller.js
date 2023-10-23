@@ -46,6 +46,16 @@ class ItemController {
       // error message
     };
   };
+
+  deleteItem(req, res) {
+    try {
+      // database connection
+      res.sendStatus(204);
+    } catch(e) {
+      console.log(e);
+      // error message
+    };
+  };
 };
 
 module.exports = new ItemController();
