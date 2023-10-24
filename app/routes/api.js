@@ -10,6 +10,7 @@ route.post('/items', ItemController.addItem);
 route.put('/items/:id', ItemController.editItem);
 route.delete('/items/:id', ItemController.deleteItem);
 
+route.post('/register', UserController.register);
 route.post('/login', UserController.login);
 
 module.exports = route;
