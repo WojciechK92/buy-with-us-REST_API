@@ -1,59 +1,72 @@
+const Item = require('../db/models/item');
+const errorsHandler = require('../db/errorsHandler');
+
 class ItemController {
-  showItemList(req, res) {
+  async showItemList(req, res) {
     try {
-      // database connection
-      res.status(200).json('List of items');
+      const items = await Item.find({});
+      res.status(200).json(items);
     } catch(e) {
-      console.log(e);
-      // error message
+      const [status, errors] = errorsHandler(e);
+      res.status(status).json(errors);
     };
   };
   
-  showItem(req, res) {
+  async showItem(req, res) {
     const { id } = req.params;    
 
     try {
-      // database connection
-      res.status(200).json('One item');
+      const item = await Item.findById(id);
+      res.status(200).json(item);
     } catch(e) {
-      console.log(e);
-      // error message
+      const [status, errors] = errorsHandler(e);
+      res.status(status).json(errors);
     };
   };
 
-  addItem(req, res) {
-    const body = req.body;
-
+  async addItem(req, res) {
     try {
-      // database connection
-
-      res.status(201).json('Success!');
+      const item = new Item({
+        name: req.body.name , 
+        category: req.body.category , 
+        amount: req.body.amount , 
+        description: req.body.description , 
+      });
+      
+      const response = await item.save();
+      res.status(201).json(response);
     } catch(e) {
-      console.log(e);
-      // error message
+      const [status, errors] = errorsHandler(e);
+      res.status(status).json(errors);
     };
   };
 
-  editItem(req, res) {
+  async editItem(req, res) {
     const { id } = req.params;    
-    const body = req.body;
-
+    
     try {
-      // database connection
-      res.status(200).json('Edited!')
+      let item = await Item.findById(id);
+
+      for (let key in req.body) {
+        item[key] = req.body[key];
+      };
+
+      const response = await item.save();
+      res.status(200).json(response);
     } catch(e) {
-      console.log(e);
-      // error message
+      const [status, errors] = errorsHandler(e);
+      res.status(status).json(errors);
     };
   };
 
-  deleteItem(req, res) {
+  async deleteItem(req, res) {
+    const { id } = req.params;
     try {
-      // database connection
+      await Item.deleteOne({ _id: id });
       res.sendStatus(204);
     } catch(e) {
-      console.log(e);
-      // error message
+      const [status, errors] = errorsHandler(e);
+      res.status(status).json(errors);
     };
   };
 };
