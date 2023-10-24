@@ -2,15 +2,16 @@ const User = require('../db/models/user');
 const errorsHandler = require('../db/errorsHandler');
 
 class UserController {
-  login(req, res) {
-    const body = req.body;
-
+  async login(req, res) {
     try {
-      // database connection
-      res.status(200).json('Logged in');
+      const user = await User.findOne({ email: req.body.email });
+      if (!user) throw new Error("User doesn't exist!")
+      const validPassword = user.comparePassword(req.body.password);
+      if (!validPassword) throw new Error('Invalid password!');
+
+      res.status(200).json(user);
     } catch(e) {
-      console.log(e);
-      // error message
+      res.status(401).json({ errors: { message: 'Wrong email or password!' } });
     };
   };
 
