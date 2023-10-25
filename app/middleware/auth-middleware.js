@@ -8,9 +8,10 @@ module.exports = (req, res, next) => {
     if (!accessToken) throw new Error('Unauthorized!');
     jwt.verify(accessToken, jwtAccessKey, (err, data) => {
       if (err) throw new Error('Unauthorized!');
-    });
 
-    next();
+      req.user = { id: data.id, email: data.email };
+      next();
+    });
   } catch(e) {
     res.status(401).json({ errors: { message: e.message } }); 
   };

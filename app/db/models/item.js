@@ -26,11 +26,11 @@ const itemSchema = new Schema({
     required: [true, 'Description is required'],
     validate: [validateString, 'Only alphabet characters and numbers (0-10) are available!'],
   },
-  // user: {
-  //   type: mongoose.Types.ObjectId,
-  //   required: [true, 'User is required'],
-  //   ref: 'User',
-  // },
+  user: {
+    type: mongoose.Types.ObjectId,
+    required: [true, 'User is required'],
+    ref: 'User',
+  },
 });
 
 const Item = mongoose.model('Item', itemSchema);

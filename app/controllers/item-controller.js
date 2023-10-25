@@ -31,6 +31,7 @@ class ItemController {
         category: req.body.category , 
         amount: req.body.amount , 
         description: req.body.description , 
+        user: req.user.id,
       });
       
       const response = await item.save();
