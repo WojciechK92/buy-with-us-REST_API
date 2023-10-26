@@ -9,12 +9,16 @@ const app = express();
 app.use(helmet());
 app.use(rateLimiterMiddleware);
 
+// public folder
+app.use(express.static('public'));
+
 // database
 require('./db/mongoose');
 
 // body parser
 app.use(express.json());
 
+// routes
 app.use(router);
 
 module.exports = app;

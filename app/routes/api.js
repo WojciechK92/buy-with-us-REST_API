@@ -1,12 +1,14 @@
 const express = require('express');
 const ItemController = require('../controllers/item-controller');
 const UserController = require('../controllers/user-controller');
+const PageController = require('../controllers/page-controller');
 const authMiddleware = require('../middleware/auth-middleware');
 const userController = require('../controllers/user-controller');
 const checkCreatorMiddleware = require('../middleware/check-creator-middleware');
 
 const route = new express.Router();
 
+route.get('/', PageController.showHomePage);
 route.get('/items', ItemController.showItemList);
 route.get('/items/:id', ItemController.showItem);
 route.post('/items', authMiddleware, ItemController.addItem);

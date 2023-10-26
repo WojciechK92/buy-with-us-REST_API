@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buy with us - Home page</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <header class="text-center py-5">
+      <h1>Buy with us - <span class="text-muted">REST API</span></h1>
+    </header>
+    <main>
+      <article>
+        <section class="mb-5">
+          <h2>Short description</h2>
+          <p class="text-muted">
+            This project is a simple REST API designed for an online store. An unauthorized user, by sending a request to a specific endpoint, receives information about a selected product or a list of products. 
+            A user who verifies their identity gains the ability to add new products as well as edit and delete products if they were added by them. The project allows authentication using an accessToken and refreshToken.
+          </p>
+        </section>
+        <section class="mb-5">
+          <h2>Routes</h2>
+          <p class="text-muted">This HTTP methods are supported.</p>
+          <table class="table text-center">
+            <thead>
+              <tr>
+                <th>Endpoint</th>
+                <th>Method</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>/items/:id</td>
+                <td>GET</td>
+                <td>Fetch item</td>
+              </tr>
+              <tr>
+                <td>/items</td>
+                <td>GET</td>
+                <td>Fetch item list</td>
+              </tr>
+              <tr>
+                <td>/register</td>
+                <td>POST</td>
+                <td>Register</td>
+              </tr>
+              <tr>
+                <td>/login</td>
+                <td>POST</td>
+                <td>Login</td>
+              </tr>
+              <tr>
+                <td>/refresh-token</td>
+                <td>POST</td>
+                <td>Refresh Access Token</td>
+              </tr>
+              <tr>
+                <td>/items</td>
+                <td>POST</td>
+                <td>Add item</td>
+              </tr>
+              <tr>
+                <td>/items/:id</td>
+                <td>PUT</td>
+                <td>Edit item</td>
+              </tr>            
+              <tr>
+                <td>/items/:id</td>
+                <td>DELETE</td>
+                <td>Delete item</td>
+              </tr>            
+              <tr>
+                <td>/logout</td>
+                <td>POST</td>
+                <td>Logout</td>
+              </tr>            
+            </tbody>
+          </table>
+        </section>
+        <section class="mb-5">
+          <h2>Usage examples</h2>
+          <p class="text-muted">You can use "Postman" to test your application.</p>
+          <div>
+            <ul>
+              <li class="mb-5">
+                <h3 class="h5">Configuration</h3>
+                <p class="text-muted">To make testing easier, it is recommended to initially configure the environment and systematically create collections of requests. The end result of this process can be seen in the attached image (this step is optional, but highly recommended).</p>
+                <img src="/img/configuration.png" alt="Configuration" class="img-fluid">
+              </li>
+              <li class="mb-5">
+                <h3 class="h5">Registration</h3>
+                <p class="text-muted">To register a user, use the ‘/register’ endpoint with the POST method by sending the registration data: email and password in the body of the request. In response, you will receive the user’s id, email, and hashed password.</p>
+                <img src="/img/register.png" alt="Register" class="img-fluid">
+              </li>
+              <li class="mb-5">
+                <h3 class="h5">Logging in</h3>
+                <p class="text-muted">To log in a user, use the ‘/login’ endpoint with the POST method by sending the login data: email and password in the body of the request. In response, you will receive the user’s id, email, access token, and refresh token.</p>
+                <img src="/img/login.png" alt="Login" class="img-fluid">
+              </li>
+              <li class="mb-5">
+                <h3 class="h5">Fetching a list of items</h3>
+                <p class="text-muted">Use the ‘/items’ endpoint with the GET method. The response will return a list of items.</p>
+                <img src="/img/fetch-item-list.png" alt="Fetch item list" class="img-fluid">
+              </li>
+              <li class="mb-5">
+                <h3 class="h5">Adding an item</h3>
+                <p class="text-muted">Use the ‘/items’ endpoint with the POST method by sending 4 values in the body of the request: name, category, amount, description. During the creation of a new item, validation is performed. For the ‘category’ value, possible variants are: ‘motorization’, ‘real-estate’, ‘house-and-garden’, ‘services’, ‘for-children’, ‘rtv-agd’. To authenticate, it is necessary to send an access token in the header (bearer token). In response, you will receive data of the created item.</p>
+                <img src="/img/add-item.png" alt="Add item" class="img-fluid">
+              </li>
+              <li class="mb-5">
+                <h3 class="h5">Editing an item</h3>
+                <p class="text-muted">Use the ‘/items/:id’ endpoint with the PUT method by sending 4 values in the body of the request: name, category, amount, description. During the edition of item, validation is performed. For the ‘category’ value, possible variants are: ‘motorization’, ‘real-estate’, ‘house-and-garden’, ‘services’, ‘for-children’, ‘rtv-agd’. To authenticate, it is necessary to send an access token in the header (bearer token). In response, you will receive data of the edited item or an error if the item was not created by you.</p>
+                <img src="/img/edit-item.png" alt="Edit item" class="img-fluid">
+              </li>
+              <li class="mb-5">
+                <h3 class="h5">Deleting an item</h3>
+                <p class="text-muted">Use the ‘/items/:id’ endpoint with the DELETE method. To authenticate, it is necessary to send an access token in the header (bearer token). In response, you will receive a status confirming the deletion of the item or an error if the item was not created by you.</p>
+                <img src="/img/delete-item.png" alt="Delete item" class="img-fluid">
+              </li>
+              <li class="mb-5">
+                <h3 class="h5">Refreshing a token</h3>
+                <p class="text-muted">Use the ‘/refresh-token’ endpoint with the POST method by sending the refresh token obtained during login in the body of the request. In response, you will receive the user’s data along with a new access token.</p>
+                <img src="/img/refresh-token.png" alt="Refresh token" class="img-fluid">
+              </li>
+              </li>
+                <li class="mb-5">
+                <h3 class="h5">Logging out</h3>
+                <p class="text-muted">Use the ‘/logout’ endpoint with the POST method by sending the refresh token obtained during login in the body of the request. In response, you will receive a status confirming the logout.</p>
+                <img src="/img/logout.png" alt="Logout" class="img-fluid">
+              </li>
+            </ul>
+          </div>
+        </section>
+      </article>
+    </main>
+  </div>
+</body>
+</html>
